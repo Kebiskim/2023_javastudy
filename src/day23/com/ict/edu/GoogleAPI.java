@@ -27,6 +27,7 @@ public class GoogleAPI {
 			URL url = new URL(imageURL);
 			// 실제 해당 주소에 접근할 수 있게 해줌
 			InputStream is = url.openStream();
+//			InputStream is = url.open
 			OutputStream os = new FileOutputStream(location);
 			byte[] b = new byte[2048];
 			int length;

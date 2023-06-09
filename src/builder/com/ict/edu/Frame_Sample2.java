@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
-public class Frame_Sample {
+public class Frame_Sample2 {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -38,7 +38,7 @@ public class Frame_Sample {
 	private String input_Id = "";
 	private String input_Pw = "";
 	DBConnection db_con = new DBConnection();
-	PWfind pwFind = new PWfind();
+	Pwfind pwFind = new Pwfind();
 	
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class Frame_Sample {
 	/**
 	 * Create the application.
 	 */
-	public Frame_Sample() {
+	public Frame_Sample2() {
 		initialize();
 	}
 
@@ -141,11 +141,12 @@ public class Frame_Sample {
 		passwordField.setBounds(200, 310, 200, 25);
 		panel.add(passwordField);
 		
-		
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				input_Id = textField.getText();
 				input_Pw = passwordField.getText();
+				System.out.println(input_Id);
+				System.out.println(input_Pw);
 				pwFind.pwFind();
 				System.out.println("버튼");
 			}
@@ -182,7 +183,7 @@ public class Frame_Sample {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Frame_Sample window = new Frame_Sample();
+					Frame_Sample2 window = new Frame_Sample2();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

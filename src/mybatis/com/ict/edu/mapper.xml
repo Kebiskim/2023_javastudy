@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.BlogMapper">
+	<!--
+		태그 : <태그 속성> 텍스트 </태그>
+		id 속성 : 외부(DAO)에서 해당 태그를 지칭하는 (호출하는)  이름, 중복안됨
+		select는 아래 두가지 밖에 없음 (map을 공부하지 않는 이상)
+		resultType 속성 : 결과에 대한 속성(select문은 95% VO 속성이다)
+		parameterType 속성 : #{컬럼명}의 자료형, 대부분 VO 속성이다. (파라미터는 없을 수도 있음)
+		=> jdbc에서 SQL 쓸 때 ? 넣는 것이 파라미터!!
+		* 파라미터가 2개 이상일 때는 무조건 vo 타입으로 해야 함! 
+		<select id="" resultType=""></select>
+		<select id="" resultType="" parameterType=""></select>
+		
+	resultType은 없다. (이유는 결과가 무조건 int(숫자)이기 때문)	  
+	<update id="" parameterType=""></update>
+	<insert id="" parameterType=""></insert>
+	<delete id="" parameterType=""></delete>
+	-->
+	<select id="custList" resultType="mybatis.com.ict.edu.VO">
+		<!-- 표 나오면 무조건 vo 타입이고, 하나의 ROW는 무조건 VO다! -->
+		SELECT * FROM CUSTOMER ORDER BY CUSTID
+	</select>
+</mapper>

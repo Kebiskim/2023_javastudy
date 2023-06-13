@@ -1,7 +1,6 @@
 package mybatis.com.ict.edu;
 
-// customer 테이블의 컬럼명과 일치 시키자.
-public class VO {
+public class Ex02_VO {
 	private String custid, name, address, phone;
 
 	public String getCustid() {
@@ -34,5 +33,7 @@ public class VO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}	
+	}
+	
+	
 }

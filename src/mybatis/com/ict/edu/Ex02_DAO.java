@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 //DB 처리하는 메서드들을 가지고 있는 클래스
-public class DAO {
+public class Ex02_DAO {
 	// 실제 사용하는 클래스 : SqlSession
 	private static SqlSession ss;
 	
@@ -38,19 +38,24 @@ public class DAO {
 		VO vo = getSession().selectOne("custOne", custid);
 		return vo;
 	}
+//	public static VO getOne2(Ex02_VO vo2) {
+//		VO vo3 = getSession().selectOne("custOne", vo2);
+//		ss.commit();
+//		return vo3;
+//	}
 	// insert, delete, update 결과 int, 파라미터 있음
 	// ☆ 반드시 commit을 해야 한다! (select는 할 필요 없어서 안해도 됨)
-	public static int getInsert(VO vo) {
+	public static int getInsert(Ex02_VO vo) {
 		int result = getSession().insert("custIns", vo);
 		ss.commit();
 		return result;
 	}
-	public static int getDelete(VO vo) {
+	public static int getDelete(Ex02_VO vo) {
 		int result = getSession().delete("custDel", vo);
 		ss.commit();
 		return result;
 	}
-	public static int getUpdate(VO vo) {
+	public static int getUpdate(Ex02_VO vo) {
 		int result = getSession().update("custUpdate", vo);
 		ss.commit();
 		return result;

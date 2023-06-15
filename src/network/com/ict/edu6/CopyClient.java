@@ -7,6 +7,7 @@ import java.net.Socket;
 public class CopyClient extends Thread {
 	Socket s;
 	ChatServer server;
+	// 객체 직렬화
 	ObjectInputStream in;
 	ObjectOutputStream out;
 	String nickName;

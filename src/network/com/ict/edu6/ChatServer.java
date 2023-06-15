@@ -32,7 +32,7 @@ public class ChatServer {
 		}
 	}
 	
-	public void sendMsg() {
+	public void sendMsg(Protocol p) {
 		try {
 			for (CopyClient k : list) {
 				k.out.writeObject(p);
@@ -42,8 +42,8 @@ public class ChatServer {
 		}
 	}
 	
-	public void removeClient() {
-		
+	public void removeClient(CopyClient cc) {
+		list.remove(cc);
 	}	
 	
 	public static void main(String[] args) {

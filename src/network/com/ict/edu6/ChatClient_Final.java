@@ -48,10 +48,8 @@ public class ChatClient_Final extends JFrame implements Runnable {
 	public ChatClient_Final() {
 		super("멀티 채팅 ver 0.2");
 		cardLayout = new CardLayout();
-		setBounds(100, 100, 380, 520);
 		contentPane = new JPanel();
 		// 테두리 부여
-
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		contentPane.setLayout(cardLayout);
 		add(contentPane);
@@ -80,8 +78,13 @@ public class ChatClient_Final extends JFrame implements Runnable {
 		
 		JLabel img = new JLabel("");
 		img.setHorizontalAlignment(SwingConstants.CENTER);
-		img.setIcon(new ImageIcon(ChatClient_Final.class.getResource("D:\\KSW\\kakao.png")));
+		img.setIcon(new ImageIcon(ChatClient_Final.class.getResource("/images/kakao.png")));
 		card1.add(img, BorderLayout.CENTER);
+
+//		JLabel img = new JLabel("");
+//        img.setHorizontalAlignment(SwingConstants.CENTER);
+//        img.setIcon(new ImageIcon(ChatClient.class.getResource("D:\\KMJ\\javastudy\\javastudy\\src\\Image\\talk.png")));
+//        card1.add(img, BorderLayout.CENTER);
 		
 		card2 = new JPanel();
 		contentPane.add(card2, "chat");
@@ -107,7 +110,6 @@ public class ChatClient_Final extends JFrame implements Runnable {
 		
 		setSize(380, 520);
 		setLocationRelativeTo(null);
-//		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
 		
@@ -119,13 +121,10 @@ public class ChatClient_Final extends JFrame implements Runnable {
 				// 사용자 닉네임 받기
 				String name = nickname_tf.getText().trim();
 				if(name.length() > 0) {
-					cardLayout.show(contentPane, "chat");
-					
 					// 서버 접속
-
 					if(connected()) {
-						// 닉네임 보내기
 						try {
+							// 닉네임 보내기
 							Protocol p = new Protocol();
 							p.setCmd(1);
 							p.setMsg(name);
@@ -153,7 +152,6 @@ public class ChatClient_Final extends JFrame implements Runnable {
 						p.setCmd(0);
 						out.writeObject(p);
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				} else {
@@ -225,7 +223,7 @@ public class ChatClient_Final extends JFrame implements Runnable {
 			try {
 				Object obj = in.readObject();
 				if (obj != null) {
-					Protocol p = new Protocol();
+					Protocol p = (Protocol)obj;
 					switch (p.getCmd()) {
 					case 0:
 						break esc;
@@ -239,6 +237,7 @@ public class ChatClient_Final extends JFrame implements Runnable {
 			} catch (Exception e) {
 			}
 		}
+		closed();
 	}
 	
 	public static void main(String[] args) {
@@ -246,7 +245,6 @@ public class ChatClient_Final extends JFrame implements Runnable {
 			@Override
 			public void run() {
 				ChatClient_Final cc = new ChatClient_Final();
-				cc.setVisible(true);
 			}
 		});
 	}

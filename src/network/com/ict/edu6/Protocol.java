@@ -8,7 +8,7 @@ public class Protocol implements Serializable {
 	// cmd => 0 : 접속종료
 	// cmd => 1 : 닉네임 받기 
 	// cmd => 2 : 메세지
-	
+	// msg => 내용
 	int cmd;
 	String msg;
 	

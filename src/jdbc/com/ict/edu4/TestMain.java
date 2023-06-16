@@ -28,7 +28,7 @@ public class TestMain {
 			}
 			break;
 		case 2:
-			VO = DAO.getInstance().getSelectOne();
+			VO_2 = DAO.getInstance().getSelectOne();
 		}
 	}
 }

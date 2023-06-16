@@ -87,6 +87,7 @@ public class ChatClient extends JFrame implements Runnable {
 		east_p.add(new JLabel(" [대기실] "), BorderLayout.NORTH);
 		user_list = new JList();
 
+		// 동남쪽 패널 (버튼)
 		JPanel east_south = new JPanel();
 		east_south.setLayout(new GridLayout(4, 1, 0, 0));
 
@@ -335,7 +336,7 @@ public class ChatClient extends JFrame implements Runnable {
 		// 가가
 		boolean value = true;
 		try {
-			s = new Socket("192.168.0.41", 7779);
+			s = new Socket("192.168.0.69", 7779);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 			new Thread(this).start();
@@ -411,7 +412,6 @@ public class ChatClient extends JFrame implements Runnable {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-
 			@Override
 			public void run() {
 				new ChatClient();

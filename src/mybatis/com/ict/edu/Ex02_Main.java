@@ -107,7 +107,7 @@ public class Ex02_Main extends JFrame {
 						Ex02_VO vo = new Ex02_VO();
 						vo.setName(name);
 						vo.setAddress(address);
-						vo.setPhone(phone);
+						vo.setPhone(phone); //
 						int res = Ex02_DAO.getInsert(vo);
 						if (res > 0) {
 							JOptionPane.showMessageDialog(getParent(), "삽입 성공");

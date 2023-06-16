@@ -49,6 +49,11 @@ public class ChatServer implements Runnable {
 		}
 	}
 	
+	public void addClient(CopyClient cc) {
+        c_list.add(cc);
+        refresh();
+    }
+	
 	// 방 목록에 방 추가
 	public void addRoom(ChatRoom room) {
 		r_list.add(room);

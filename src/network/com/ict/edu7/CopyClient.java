@@ -78,6 +78,10 @@ public class CopyClient extends Thread {
 						server.refresh();
 						break;
 					case 5: // 방나가기
+						outRoom();
+                        server.refresh();
+                        // 대기실 자기 자신 추가
+                        server.addClient(this);
 						break; 
 					case 6: // 쪽지 보내기
 						CopyClient client = server.c_list.get(p.getC_index());

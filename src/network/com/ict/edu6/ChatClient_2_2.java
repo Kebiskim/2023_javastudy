@@ -29,7 +29,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-public class ChatClient extends JFrame implements Runnable{
+public class ChatClient_2_2 extends JFrame implements Runnable {
 	JPanel contentPane;
 	JTextField nickname_tf;
 	JButton join_bt;
@@ -41,16 +41,14 @@ public class ChatClient extends JFrame implements Runnable{
 	JScrollPane jsp;
 	CardLayout cardLayout ;
 	
-	// 접속
 	Socket s = null;
 	ObjectOutputStream out = null;
 	ObjectInputStream in = null;
 	
-	public ChatClient() {
+	public ChatClient_2_2() {
 		super("멀티 채팅 ver 0.2");
 		cardLayout = new CardLayout();
 
-		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10,10,10,10));
 		contentPane.setLayout(cardLayout);
@@ -80,7 +78,7 @@ public class ChatClient extends JFrame implements Runnable{
 		
 		JLabel img = new JLabel("");
 		img.setHorizontalAlignment(SwingConstants.CENTER);
-		img.setIcon(new ImageIcon(ChatClient.class.getResource("/images/talk.png")));
+		img.setIcon(new ImageIcon(ChatClient.class.getResource("/images/kakao.png")));
 		card1.add(img, BorderLayout.CENTER);
 		
 		card2 = new JPanel();
@@ -114,32 +112,31 @@ public class ChatClient extends JFrame implements Runnable{
 		join_bt.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// cardLayout.show(contentPane, "chat");
 				// 사용자 닉네임 받기
 				String name = nickname_tf.getText().trim();
 				if(name.length() > 0) {
-					// 서버 접속 
+					// 서버 접속이 되었을 때
 					if(connected()) {
 						try {
 							// 닉네임 보내기
-							Protocol p = new Protocol();
+							Protocol_2 p = new Protocol_2();
 							p.setCmd(1);
 							p.setMsg(name);
 							out.writeObject(p);
 							cardLayout.show(contentPane, "chat");
-						} catch (IOException e1) {
-							e1.printStackTrace();
+						} catch (IOException e2) {
+							e2.printStackTrace();
 						}
 					}
-				}else {
-					JOptionPane.showMessageDialog(getParent(), "닉네임 입력하세요");
+				} else {
+					JOptionPane.showMessageDialog(getParent(), "닉네임 입력하세요.");
 					nickname_tf.setText("");
 					nickname_tf.requestFocus();
 				}
 			}
 		});
 		
-		// 창 종료 했을 때 
+		// 창 종료했을 때
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -148,10 +145,10 @@ public class ChatClient extends JFrame implements Runnable{
 						Protocol p = new Protocol();
 						p.setCmd(0);
 						out.writeObject(p);
-					} catch (IOException e1) {
-						e1.printStackTrace();
+					} catch (Exception e2) {
+						e2.printStackTrace();
 					}
-				}else {
+				} else {
 					closed();
 				}
 			}
@@ -169,16 +166,22 @@ public class ChatClient extends JFrame implements Runnable{
 			}
 		});
 	}
-	private void sendMessage() {
+	
+	public void sendMessage() {
 		String msg = input_tf.getText().trim();
-		if(msg.length()>0) {
+		if(msg.length() > 0) {
 			try {
-				// 메세지 보내기 
+				// 메세지 보내기
 				Protocol p = new Protocol();
 				p.setCmd(2);
 				p.setMsg(msg);
+				// 접속 제대로 안 되어있으면 여기서 계속 오류남!
+				// java.net.SocketException: 현재 연결은 사용자의 호스트 시스템의 
+				// 소프트웨어의 의해 중단되었습니다
+				// SocketException 의 가장 일반적인 원인은 닫힌 소켓 연결 에서 데이터를 쓰거나 읽는 것 입니다. 
+				// 또 다른 원인은 소켓 버퍼의 모든 데이터를 읽기 전에 연결을 닫는 것입니다
 				out.writeObject(p);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -186,19 +189,21 @@ public class ChatClient extends JFrame implements Runnable{
 		input_tf.requestFocus();
 	}
 	
+	// 연결 부분은 private으로, boolean으로
 	private boolean connected() {
-	  boolean value = true;
-	  try {
-		  s = new Socket("192.168.0.41", 7778);
-		  out = new ObjectOutputStream(s.getOutputStream());
-		  in = new ObjectInputStream(s.getInputStream());
-		  new Thread(this).start();
-		  return value;
+		boolean value = true;
+		try {
+			s = new Socket("192.168.0.69", 7790);
+			out = new ObjectOutputStream(s.getOutputStream());
+			in = new ObjectInputStream(s.getInputStream());
+			new Thread(this).start();
+			return value;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	  return false;
+		return false;
 	}
+	
 	private void closed() {
 		try {
 			out.close();
@@ -206,38 +211,41 @@ public class ChatClient extends JFrame implements Runnable{
 			s.close();
 			System.exit(0);
 		} catch (Exception e) {
+
 		}
 	}
-	// 받기
+	
+	// run으로 받아오기
 	@Override
 	public void run() {
-		esc:while(true) {
+		esc: while(true) {
 			try {
+				// 
 				Object obj = in.readObject();
-				if(obj != null) {
-					Protocol p = (Protocol)obj;
-					switch (p.getCmd()) {
-					case 0:  // 종료
-						break esc;
-
-					case 2 : // 메세지
-						jta.append(p.getMsg()+"\n");
-						jta.setCaretPosition(jta.getText().length());
-						break;
+				if (obj != null) {
+					Protocol p = (Protocol) obj;
+					switch(p.getCmd()) {
+						case 0: // 종료
+							break esc;
+							// caret : ^ (used for the proofeading)
+						case 2: // 메세지
+							jta.append(p.getMsg()+"\n");
+							jta.setCaretPosition(jta.getText().length());
+							break;
 					}
-					
 				}
 			} catch (Exception e) {
+
 			}
 		}
 		closed();
-		
 	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				ChatClient cc = new ChatClient();
+				ChatClient_2_2 cc = new ChatClient_2_2();
 			}
 		});
 	}

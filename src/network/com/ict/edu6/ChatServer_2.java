@@ -1,10 +1,8 @@
 package network.com.ict.edu6;
 
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
-
-
-
 
 public class ChatServer_2 {
 	ServerSocket ss = null;
@@ -13,11 +11,11 @@ public class ChatServer_2 {
 	public ChatServer_2() {
 		list = new ArrayList<>();
 		try {
-			ss = new ServerSocket(7778);
+			ss = new ServerSocket(7790);
 			System.out.println("서버 대기중 ... ");
 			exec();
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 	}
 	
@@ -43,6 +41,10 @@ public class ChatServer_2 {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+	
+	public void removeClient(CopyClient_2 cc) {
+		list.remove(cc);
 	}
 	
 	public static void main(String[] args) {

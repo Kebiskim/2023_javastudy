@@ -25,6 +25,7 @@ public class Ex03 {
 			System.out.println("인코딩 : " + conn.getContentEncoding());
 			System.out.println("길이 : " + conn.getContentLength());
 			System.out.println("문서타입 : " + conn.getContentType());
+//			System.out.println("문서타입 : " + conn.
 			
 			// 인터넷 정보는 헤더와 바디로 나눠진다.
 			// 헤더 정보를 가지고 웹브라우저가 해석하고 실행한다.

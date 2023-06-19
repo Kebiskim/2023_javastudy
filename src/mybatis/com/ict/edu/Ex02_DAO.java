@@ -20,8 +20,8 @@ public class Ex02_DAO {
 	// DB처리하는 메서드들
 	// customer 테이블 전체보기
 	// select, 결과는 여러개, 파라미터가 없음.
-	public static List<VO> getList(){
-		List<VO> list = null;
+	public static List<VO3> getList(){
+		List<VO3> list = null;
 		// selectList() : 결과가 하나 이상일 때
 		// selectOne() : 반드시 결과가 하나일 때만! or 0개일 때 (나머지는 selectList)
 		// 결과가 하나일 때 List쓰면 오류 안 남!!
@@ -33,9 +33,9 @@ public class Ex02_DAO {
 		return list;
 	}
 	// select, 결과는 하나, 파라미터 있음(String)
-	public static VO getOne(String custid) {
+	public static VO3 getOne(String custid) {
 		// 대소문자 맞춰야 함!! (custOne, custList) id는 기본적으로, 소문자로 시작함! (variable 명명법과 같음)
-		VO vo = getSession().selectOne("custOne", custid);
+		VO3 vo = getSession().selectOne("custOne", custid);
 		return vo;
 	}
 //	public static VO getOne2(Ex02_VO vo2) {

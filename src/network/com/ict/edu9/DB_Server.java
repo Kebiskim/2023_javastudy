@@ -11,7 +11,7 @@ public class DB_Server implements Runnable {
 	Socket s = null;
 	public DB_Server() {
 		try {
-			ss = new ServerSocket(7782);
+			ss = new ServerSocket(8897);
 			System.out.println("서버 대기중 ... ");
 			new Thread(this).start();
 		} catch (IOException e) {

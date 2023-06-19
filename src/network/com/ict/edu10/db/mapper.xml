@@ -13,12 +13,15 @@
 	</select>
 	
 	<insert id ="custIns" parameterType="network.com.ict.edu10.db.VO_2">
-		INSERT INTO CUSTOMER(CUSTID, NAME, ADDRESS, PHONE)
-		VALUES(CUSTOMER_SEQ.NEXTVAL, #{name}, #{address}, #{phone})
+		insert into customer(custid, name, address, phone)
+		values(#{custid}, #{name}, #{address}, #{phone})
 	</insert>
 	
+	<!-- insert into customer(custid, name, address, phone)
+		values(customer_seq.nextval, #{name}, #{address}, #{phone}) -->
+	
 	<delete id = "custDel" parameterType="network.com.ict.edu10.db.VO_2">
-		DELETE FROM CUSTOMER WHERE CUSTID = #{custid}
+		delete from customer where custid = #{custid}
 	</delete>
 	
 	<update id = "custUpdate" parameterType="network.com.ict.edu10.db.VO_2">

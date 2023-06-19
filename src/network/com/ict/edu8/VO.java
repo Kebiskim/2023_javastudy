@@ -5,11 +5,10 @@ import java.io.Serializable;
 
 public class VO implements Serializable {
 	// 0: 종료, 1: 채팅, 2: 그림그리기
-	private String msg;
 	private int cmd;
+	private String msg;
 	private int x, y, wh;
-	private Color color;
-	
+	private Color color;	
 	
 	public String getMsg() {
 		return msg;
@@ -47,6 +46,4 @@ public class VO implements Serializable {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	
-	
 }

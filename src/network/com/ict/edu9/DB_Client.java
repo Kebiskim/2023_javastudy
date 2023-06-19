@@ -10,16 +10,19 @@ import java.awt.event.WindowEvent;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+
 import network.com.ict.edu10.db.VO_2;
 
 public class DB_Client extends JFrame implements Runnable {
@@ -28,6 +31,9 @@ public class DB_Client extends JFrame implements Runnable {
 	JButton jb1, jb2, jb3, jb4;
 	JTextArea jta;
 	JScrollPane jsp;
+	String custid_DB, name_DB, address_DB, phone_DB;
+//	ArrayList<VO_2> list = new ArrayList<VO_2>;
+//	VO_2 vo = new VO_2();
 
 	Socket s;
 	ObjectOutputStream out;
@@ -128,16 +134,33 @@ public class DB_Client extends JFrame implements Runnable {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Protocol p = new Protocol();
-					p.setCmd(2);
-					VO_2 vo = new VO_2();
-					vo.setName(jtf2.getText());
-					vo.setAddress(jtf3.getText());
-					vo.setPhone(jtf4.getText());
-					out.writeObject(p);
-					out.flush();
+//					if (jtf1.getText().length() == 0 
+					if (jtf1.getText().length() > 0 
+					&& jtf2.getText().length() > 0 
+					&& jtf3.getText().length() > 0 
+					&& jtf4.getText().length() > 0) {
+						Protocol p = new Protocol();
+
+						p.setCmd(2);
+						
+//						custid_DB = jtf1.getText();
+//						name_DB = jtf2.getText();
+//						address_DB = jtf3.getText();
+//						phone_DB = jtf4.getText();
+						System.out.println(p.vo);
+						// vo는 null로 나온다.
+						p.vo.setName(jtf2.getText());
+						p.vo.setAddress(jtf3.getText());
+						p.vo.setPhone(jtf4.getText());
+						System.out.println("입력완료");
+						out.writeObject(p);
+//						out.writeObject(vo);
+						out.flush();												
+					} else {
+						JOptionPane.showMessageDialog(getParent(), "데이터를 제대로 입력하세요.");
+					}
 				} catch (Exception e2) {
-					
+					System.out.println(e2);
 				}
 			}
 		});
@@ -145,11 +168,15 @@ public class DB_Client extends JFrame implements Runnable {
 		
 		
 	}
+//	public ArrayList<VO_2> values() {
+//		list.add(vo);
+//		return list;
+//	}
 	
 	// 접속
 	public void connected() {
 		try {
-			s = new Socket("192.168.0.69", 7782);
+			s = new Socket("192.168.25.2", 8897);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 			new Thread(this).start();

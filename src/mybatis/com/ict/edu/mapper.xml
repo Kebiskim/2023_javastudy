@@ -33,13 +33,13 @@
 	
 	<!-- mapper 에서 소문자로 들어가야 함!! -->
 	<insert id ="custIns" parameterType="mybatis.com.ict.edu.VO">
-		INSERT INTO CUSTOMER(CUSTID, NAME, ADDRESS, PHONE)
-		VALUES(CUSTOMER_SEQ.NEXTVAL, #{name}, #{address}, #{phone})
+		insert into customer(custid, name, address, phone)
+		values(customer_seq.nextval, #{name}, #{address}, #{phone})
 	</insert>
 	
 	<!-- DB에서 새로 만든 table에 대해 커밋 안하면 삭제코드 작동 안함?? -->
 	<delete id = "custDel" parameterType="mybatis.com.ict.edu.VO">
-		DELETE FROM CUSTOMER WHERE CUSTID = #{custid}
+		delete from customer where custid = #{custid}
 	</delete>
 	
 	<update id = "custUpdate" parameterType="mybatis.com.ict.edu.VO">

@@ -36,6 +36,8 @@ public class CM_Server implements Runnable {
 	public void sendMsg(VO vo) {
 		try {
 			for (CP_Client k : list) {
+				// ObjectOutputStream의 writeObject(Object obj)를 사용해서 
+				// 객체를 출력하면, 객체가 파일에 직렬화되어 저장된다. 
 				k.out.writeObject(vo);
 				// out에 flush() 안 붙이면 속도가 느리다!!
 				k.out.flush();
@@ -61,6 +63,6 @@ public class CM_Server implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-		
+		new CM_Server();
 	}
 }

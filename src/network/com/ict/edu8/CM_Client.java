@@ -47,6 +47,7 @@ public class CM_Client extends JFrame implements Runnable {
 	
 	// 접속
 	Socket s;
+	// 직렬화 및 역직렬화
 	ObjectOutputStream out;
 	ObjectInputStream in;
 	String msg;
@@ -115,6 +116,7 @@ public class CM_Client extends JFrame implements Runnable {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				// 소켓이 널이라는 뜻??
 				if(s!=null) {
 					try {
 						VO vo = new VO();
@@ -226,7 +228,7 @@ public class CM_Client extends JFrame implements Runnable {
 	// 접속
 	public void connected() {
 		try {
-			s = new Socket("192.168.0.69", 7780);
+			s = new Socket("192.168.25.2", 7780);
 			out = new ObjectOutputStream(s.getOutputStream());
 			in = new ObjectInputStream(s.getInputStream());
 			new Thread(this).start();
@@ -253,6 +255,7 @@ public class CM_Client extends JFrame implements Runnable {
 			if(msg.length()>0) {
 				VO vo = new VO();
 				vo.setCmd(1);
+				vo.setMsg(msg);
 				out.writeObject(vo);
 				out.flush();
 			}

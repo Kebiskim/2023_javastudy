@@ -9,6 +9,8 @@ public class Protocol implements Serializable {
 	int cmd;
 	int result;
 	List<VO_2> list;
+	// 프로토콜에 들어있는 VO가 정답이 아닐까?
+	// public인데 왜 getter, setter 있나?
 	VO_2 vo;
 	
 	public int getCmd() {
@@ -35,9 +37,4 @@ public class Protocol implements Serializable {
 	public void setVo(VO_2 vo) {
 		this.vo = vo;
 	}
-	
-	
-
-	
-	
 }

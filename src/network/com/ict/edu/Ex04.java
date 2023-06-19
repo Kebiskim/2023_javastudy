@@ -37,7 +37,9 @@ public class Ex04 {
 		
 		// 파일 쓰기
 		String pathname = "D:"+File.separator+"ksw"+File.separator+"오늘날씨.txt";
-		File file = new File(pathname);
+		String pathname_home = "C:"+File.separator+"Users"+File.separator+"PC"+File.separator+
+				"Downloads"+File.separator+"JavaPractice"+File.separator+"KSW"+File.separator+"ksw01.txt";
+		File file = new File(pathname_home);
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		
@@ -57,6 +59,7 @@ public class Ex04 {
 			InputSource in = new InputSource(new StringReader(sb.toString()));
 //			http://www.kma.go.kr/XML/weather/sfc_web_map.xml
 			// 안드로이드는 XML 파싱하는 방법이 세가지, 자바에서는 두가지. 가장 전통적인 방식이 DOM
+			// 안드 : DOM 파서 or SAX 파서 or Pull parser
 			// XML 파싱 : DOM 방식
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();

@@ -20,7 +20,10 @@ public class Ex02 {
 		
 		// 내컴퓨터에 저장
 		String pathname = "D:"+File.separator+"ksw"+File.separator+"ksw01.txt";
-		File file = new File(pathname);
+		String pathname_home = "C:"+File.separator+"Users"+File.separator+"PC"+File.separator+
+				"Downloads"+File.separator+"JavaPractice"+File.separator+"KSW"+File.separator+"ksw01.txt";
+//		C:\Users\PC\Downloads\JavaPractice\KSW
+		File file = new File(pathname_home);
 		FileWriter fw = null;
 		BufferedWriter bw = null;
 		
@@ -39,6 +42,8 @@ public class Ex02 {
 			
 			String msg = null;
 			StringBuffer sb = new StringBuffer();
+			// readLine() => text를 줄 단위로 읽어들인다.
+			// - 만약 stream의 끝에 다다르면 (EOF) null 값을 반환한다.
 			while((msg = br.readLine()) != null) {
 //				System.out.println(msg+"\n");
 				sb.append(msg+"\n");
